@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    {% load static %}
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <title>Ninja Gold</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ninja Gold</h1>
+      <h2>
+        Your Gold: <span id="total-gold">{{request.session.total_gold}}</span>
+      </h2>
+      <button onclick="window.location.href='/reset'">Play Again!</button>
+      <section id="forms">
+        <form method="post" action="/process_money">
+          <h3>Farm</h3>
+          <h4>(earns 10-20 gold)</h4>
+          {% csrf_token %}
+          <input type="hidden" name="which_form" value="farm" />
+          <input class="form-btn" type="submit" value="Find Gold!" />
+        </form>
+        <form method="post" action="/process_money">
+          <h3>Cave</h3>
+          <h4>(earns 5-10 gold)</h4>
+          {% csrf_token %}
+          <input type="hidden" name="which_form" value="cave" />
+          <input class="form-btn" type="submit" value="Find Gold!" />
+        </form>
+        <form method="post" action="/process_money">
+          <h3>House</h3>
+          <h4>(earns 2-5 gold)</h4>
+          {% csrf_token %}
+          <input type="hidden" name="which_form" value="house" />
+          <input class="form-btn" type="submit" value="Find Gold!" />
+        </form>
+        <form method="post" action="/process_money">
+          <h3>Casino</h3>
+          <h4>(earns/takes 0-50 gold)</h4>
+          {% csrf_token %}
+          <input type="hidden" name="which_form" value="casino" />
+          <input class="form-btn" type="submit" value="Find Gold!" />
+        </form>
+      </section>
+      <h4>Activities</h4>
+      <div id="activities"></div>
+    </div>
+  </body>
+</html>
